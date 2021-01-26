@@ -16,7 +16,7 @@ celdasX, celdasY = 50,50
 anchoCeldas = ancho / celdasX # ancho de la celda
 altoCeldas = alto / celdasY # alto de la celda
 
-pauseExecution = False # control de la ejecución del juego
+pauseExecution = True # control de la ejecución del juego
 
 # celda a 1 --> viva || celda a 0 --> muerta
 estadoTablero = np.zeros((celdasX,celdasY)) # matriz de tamaño del tablero
@@ -42,7 +42,7 @@ while True:
     pantalla.fill(fondoPantalla) # se pinta el fondo de la pantalla
 
     # delay
-    time.sleep(0.2)
+    time.sleep(0.1)
 
     ev = pygame.event.get() 
 
@@ -61,14 +61,14 @@ while True:
     for y in range (0,celdasY):
         for x in range (0,celdasX):
 
-            if not pauseExecution:
+            if  not pauseExecution:
                 # vecinos cercanos a cada x,y
                 # con el modulo conseguimos que el vecino del tablero de un borde actue como un toroide [de la izquierda se pasa a la derecha y de arriba a abajo]
                 vecinos = estadoTablero[(x-1) % celdasX,(y-1) % celdasY] + \
                         estadoTablero[(x-1) % celdasX,(y) % celdasY] + \
                         estadoTablero[(x-1) % celdasX,(y+1) % celdasY] + \
                         estadoTablero[(x) % celdasX,(y-1) % celdasY] + \
-                        estadoTablero[(x) % celdasX,(y) % celdasY] + \
+                        estadoTablero[(x) % celdasX,(y+1) % celdasY] + \
                         estadoTablero[(x+1) % celdasX,(y-1) % celdasY] + \
                         estadoTablero[(x+1) % celdasX,(y) % celdasY] + \
                         estadoTablero[(x+1) % celdasX,(y+1) % celdasY] 
